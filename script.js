@@ -3,10 +3,11 @@
 
 function play(element) {
     let results = {0:"rock", 1:"paper", 2:"scissors"};
-    let AIresult = Math.floor(Math.random()*100)%3;
+    let AIresult = Math.floor(Math.random()*3)%3;
     let btn = element.innerText;
     let Hresult = btn == 'Rock' ? 0 : btn == "Paper" ? 1 : 2;
 
+    let value;
     let result;
 
     if (Hresult == 0) {
@@ -36,21 +37,38 @@ function play(element) {
         }
     }
 
-    document.getElementById("comp-choice").innerHTML = results[AIresult];
-    document.getElementById("result").innerHTML = result;
+    document.getElementById("comp-choice").textContent = results[AIresult];
+    document.getElementById("result").textContent = result;
+
+
+    if (result == "You Win") {
+        document.getElementById("PC").textContent++;
+        // document.getElementById("PC").textContent = +value + 1;
+    } else if (result == "You Lose") {
+        document.getElementById("CPU").textContent++;
+        // document.getElementById("CPU").textContent = +value + 1;
+    }
+
+}
+
+function reset_score() {
+    document.getElementById("PC").textContent = 0;
+    document.getElementById("CPU").textContent = 0;
 }
 
 
-let rock, paper, scissors;
+let rock, paper, scissors, reset;
 
 rock = document.getElementById("rock");
-rock.addEventListener("click", () => play(rock));
+rock.addEventListener("click", play);
 
 paper = document.getElementById("paper");
-paper.addEventListener("click", () => play(paper));
+paper.addEventListener("click", play);
 
 scissors = document.getElementById("scissors");
-scissors.addEventListener("click", () => play(scissors));
+scissors.addEventListener("click", play);
 
+reset = document.getElementById("reset");
+reset.addEventListener("click", reset_score);
 
 // 
